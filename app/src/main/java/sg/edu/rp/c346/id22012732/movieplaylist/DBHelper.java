@@ -40,7 +40,7 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public long insertMovie(String title, String singers, int year, int stars) {
+    public long insertMovie(String title, String genre, int year, String rating) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_TITLE, title);
@@ -53,38 +53,38 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<Movie> getAllMovies() {
-        ArrayList<Movie> songList = new ArrayList<>();
+        ArrayList<Movie> movieList = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(TABLE_MOVIE, null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             int titleIndex = cursor.getColumnIndex(COLUMN_TITLE);
-            int singersIndex = cursor.getColumnIndex(COLUMN_GENRE);
+            int genreIndex = cursor.getColumnIndex(COLUMN_GENRE);
             int yearIndex = cursor.getColumnIndex(COLUMN_YEAR);
-            int starsIndex = cursor.getColumnIndex(COLUMN_RATING);
+            int ratingIndex = cursor.getColumnIndex(COLUMN_RATING);
 
             do {
                 String title = cursor.getString(titleIndex);
                 String genre = cursor.getString(genreIndex);
                 int year = cursor.getInt(yearIndex);
                 String rating = cursor.getString(ratingIndex);
-                Movie movie= new Movie(title, genre, year, rating);
+                Movie movie = new Movie(title, genre, year, rating);
                 movieList.add(movie);
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
-        return songList;
+        return movieList;
     }
 
-    public boolean updateMovie(Movie song) {
+    public boolean updateMovie(Movie movie) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_TITLE, song.getTitle());
-        values.put(COLUMN_GENRE, song.getGenre());
-        values.put(COLUMN_YEAR, song.getYear());
-        values.put(COLUMN_RATING, song.getRating());
+        values.put(COLUMN_TITLE, movie.getTitle());
+        values.put(COLUMN_GENRE, movie.getGenre());
+        values.put(COLUMN_YEAR, movie.getYear());
+        values.put(COLUMN_RATING, movie.getRating());
 
-        int rowsAffected = db.update(TABLE_MOVIE, values, COLUMN_ID + "=?", new String[]{String.valueOf(Movie.getId())});
+        int rowsAffected = db.update(TABLE_MOVIE, values, COLUMN_ID + "=?", new String[]{String.valueOf(movie.getId())});
         db.close();
         return rowsAffected > 0;
     }

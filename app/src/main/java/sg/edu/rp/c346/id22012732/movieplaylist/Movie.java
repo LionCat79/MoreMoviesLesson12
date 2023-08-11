@@ -1,79 +1,56 @@
 package sg.edu.rp.c346.id22012732.movieplaylist;
 
-import android.content.ContentValues;
-import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+public class Movie {
+    private int id;
+    private String title;
+    private String genre;
+    private int year;
+    private String rating;
 
-import androidx.appcompat.app.AppCompatActivity;
+    public Movie(String title, String genre, int year, String rating) {
+        this.title = title;
+        this.genre = genre;
+        this.year = year;
+        this.rating = rating;
+    }
 
-public class MainActivity extends AppCompatActivity {
+    public int getId() {
+        return id;
+    }
 
-    EditText movieTitleEditText;
-    EditText genreEditText;
-    EditText releaseYearText;
-    RadioGroup ratings;
-    Button insertButton;
-    Button displayButton;
+    public String getTitle() {
+        return title;
+    }
 
-    public class Movie {
-        private int id;
-        private String title;
-        private String genre;
-        private int year;
-        private String rating;
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-        public Movie(String title, String genre, int year, String rating) {
-            this.title = title;
-            this.genre = genre;
-            this.year = year;
-            this.rating = rating;
-        }
+    public String getGenre() {
+        return genre;
+    }
 
-        public int getId() {
-            return id;
-        }
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
 
-        public String getTitle() {
-            return title;
-        }
+    public int getYear() {
+        return year;
+    }
 
-        public void setTitle(String title) {
-            this.title = title;
-        }
+    public void setYear(int year) {
+        this.year = year;
+    }
 
-        public String getGenre() {
-            return genre;
-        }
+    public String getRating() {
+        return rating;
+    }
 
-        public void setGenre(String genre) {
-            this.genre = genre;
-        }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-        public int getYear() {
-            return year;
-        }
-
-        public void setYear(int year) {
-            this.year = year;
-        }
-
-        public String getRating() {
-            return rating;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-
-        public void setRating(String rating) {
-            this.rating = rating;
-        }
+    public void setRating(String rating) {
+        this.rating = rating;
     }
 }

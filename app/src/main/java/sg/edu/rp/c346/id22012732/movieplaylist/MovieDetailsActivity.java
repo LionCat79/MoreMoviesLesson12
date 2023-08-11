@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-    public class SongDetailsActivity extends AppCompatActivity {
+    public class MovieDetailsActivity extends AppCompatActivity {
 
         private EditText titleEditText;
         private EditText genreEditText;
@@ -36,13 +36,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
             // Get the clicked song from the intent
             String title = getIntent().getStringExtra("title");
-            String singers = getIntent().getStringExtra("singers");
+            String genre = getIntent().getStringExtra("genre");
             int year = getIntent().getIntExtra("year", 0);
             int stars = getIntent().getIntExtra("stars", 0);
 
             // Display the song details in the EditText fields
             titleEditText.setText(title);
-            genresEditText.setText(genre);
+            genreEditText.setText(genre);
             yearEditText.setText(String.valueOf(year));
 
 
@@ -51,25 +51,25 @@ import androidx.appcompat.app.AppCompatActivity;
                 public void onClick(View v) {
                     // Get the clicked song from the intent
                     String title = getIntent().getStringExtra("title");
-                    String singers = getIntent().getStringExtra("singers");
+                    String genre = getIntent().getStringExtra("genre");
                     int year = getIntent().getIntExtra("year", 0);
-                    int stars = getIntent().getIntExtra("stars", 0);
+                    String rating = getIntent().getStringExtra("rating");
 
                     // Initialize the song object with the retrieved data
-                    song = new Song(title, singers, year, stars);
+                    movie = new Movie(title, genre, year, rating);
 
                     // Update the song details based on the edited values
-                    song.setTitle(titleEditText.getText().toString());
-                    song.setSingers(singersEditText.getText().toString());
-                    song.setYear(Integer.parseInt(yearEditText.getText().toString()));
+                    movie.setTitle(titleEditText.getText().toString());
+                    movie.setGenre(genreEditText.getText().toString());
+                    movie.setYear(Integer.parseInt(yearEditText.getText().toString()));
 
                     // Update the song record in the database
-                    boolean isUpdated = dbHelper.updateSong(song);
+                    boolean isUpdated = dbHelper.updateMovie(movie);
 
                     if (isUpdated) {
-                        Toast.makeText(SongDetailsActivity.this, "Song updated successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MovieDetailsActivity.this, "Movie updated successfully", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(SongDetailsActivity.this, "Failed to update song", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MovieDetailsActivity.this, "Failed to update movie", Toast.LENGTH_SHORT).show();
                     }
 
                     // Finish the activity and go back to the previous activity
@@ -82,22 +82,22 @@ import androidx.appcompat.app.AppCompatActivity;
                 public void onClick(View v) {
                     // Get the clicked song details from the intent
                     String title = getIntent().getStringExtra("title");
-                    String singers = getIntent().getStringExtra("singers");
+                    String genre = getIntent().getStringExtra("genre");
                     int year = getIntent().getIntExtra("year", 0);
-                    int stars = getIntent().getIntExtra("stars", 0);
-                    int id = getIntent().getIntExtra("id", 0); // Add this line to get the id
+                    String rating = getIntent().getStringExtra("rating");
+                    int id = getIntent().getIntExtra("id", 0);
 
-                    // Initialize the song object with the retrieved data and set the id
-                    song = new Song(title, singers, year, stars);
-                    song.setId(id); // Set the id in the song object
+
+                    movie = new Movie(title, genre, year, rating);
+                    movie.setId(id);
 
                     // Delete the song record from the database
-                    boolean isDeleted = dbHelper.deleteSong(song);
-                    Log.d("SongDetailsActivity", "Song deleted: " + isDeleted);
+                    boolean isDeleted = dbHelper.deleteMovie(movie);
+                    Log.d("MovieDetailsActivity", "Song deleted: " + isDeleted);
                     if (isDeleted) {
-                        Toast.makeText(SongDetailsActivity.this, "Song deleted successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MovieDetailsActivity.this, "Movie deleted successfully", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(SongDetailsActivity.this, "Failed to delete song", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MovieDetailsActivity.this, "Failed to delete movie", Toast.LENGTH_SHORT).show();
                     }
 
                     // Finish the activity and go back to the previous activity

@@ -12,14 +12,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MoviePlaylist"
         tools:targetApi="31">
+
+        <!-- MainActivity -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <!-- MovieListActivity -->
+        <activity
+            android:name=".MovieListActivity"
+            android:label="Movie List Activity">
+        </activity>
+
+        <!-- MovieDetailsActivity -->
+        <activity
+            android:name=".MovieDetailsActivity"
+            android:label="Movie Details Activity">
         </activity>
     </application>
 

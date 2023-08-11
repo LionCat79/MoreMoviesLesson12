@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int selectedRadioButtonId = ratings.getCheckedRadioButtonId();
                 RadioButton selectedRadioButton = findViewById(selectedRadioButtonId);
-                String selectedRating = selectedRadioButton.getText().toString(); // Change variable name to selectedRating
+                String selectedRating = selectedRadioButton.getText().toString();
 
                 // Get the entered movie title and genre
                 String movieTitle = movieTitleEditText.getText().toString();
@@ -65,15 +65,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void insertSongRecord(String movieTitle, String genre, int year, String rating) {
+    private void insertMovieRecord(String movieTitle, String genre, int year, String rating) {
         DBHelper dbHelper = new DBHelper(this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(DBHelper.COLUMN_TITLE, movieTitle);
-        values.put(DBHelper.COLUMN_SINGERS, genre);
+        values.put(DBHelper.COLUMN_GENRE, genre);
         values.put(DBHelper.COLUMN_YEAR, year);
-        values.put(DBHelper.COLUMN_STARS, rating);
+        values.put(DBHelper.COLUMN_RATING, rating);
 
         long result = db.insert(DBHelper.TABLE_MOVIE, null, values);
         db.close();
